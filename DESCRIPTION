@@ -1,3 +1,4 @@
+Encoding: UTF-8
 Package: threshtvp
 Title: Bayesian Estimation of (Threshold) Time-Varying Parameter Models
 Version: 0.3
@@ -12,3 +13,4 @@ License: GPL (>= 2)
 Imports: Rcpp (>= 0.11.6)
 LinkingTo: Rcpp, RcppArmadillo
 NeedsCompilation: yes
+RoxygenNote: 6.1.0
