@@ -21,19 +21,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// dinvgamma
-double dinvgamma(const double x, const double a, const double b);
-RcppExport SEXP _threshtvp_dinvgamma(SEXP xSEXP, SEXP aSEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const double >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type a(aSEXP);
-    Rcpp::traits::input_parameter< const double >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(dinvgamma(x, a, b));
-    return rcpp_result_gen;
-END_RCPP
-}
 // KF
 List KF(NumericMatrix y, NumericMatrix Z, NumericMatrix Ht, NumericMatrix Qtt, int m, int p, int t, NumericVector B0, NumericMatrix V0);
 RcppExport SEXP _threshtvp_KF(SEXP ySEXP, SEXP ZSEXP, SEXP HtSEXP, SEXP QttSEXP, SEXP mSEXP, SEXP pSEXP, SEXP tSEXP, SEXP B0SEXP, SEXP V0SEXP) {
@@ -113,7 +100,6 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_threshtvp_get_threshold", (DL_FUNC) &_threshtvp_get_threshold, 5},
-    {"_threshtvp_dinvgamma", (DL_FUNC) &_threshtvp_dinvgamma, 3},
     {"_threshtvp_KF", (DL_FUNC) &_threshtvp_KF, 9},
     {"_threshtvp_get_lik", (DL_FUNC) &_threshtvp_get_lik, 9},
     {"_threshtvp_KF_fast", (DL_FUNC) &_threshtvp_KF_fast, 9},
