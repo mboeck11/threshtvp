@@ -101,7 +101,8 @@ MCMC_tvp <- function(Y,X,nburn,nsave,priorbtheta=list(B_1=2,B_2=1,kappa0=1e-07),
     hv <- svdraw$latent
     para <- list(mu=-10,phi=.9,sigma=.2)
     H <- matrix(-10,T,M)
-    thin_out <- round(seq(nburn,ntot,length.out = thin*nsave))
+    thindraws <- ceiling(thin*nsave)
+    thin_out <- round(seq(nburn,ntot,length.out = thindraws))
     
     ## NEW: stochvol
     a0 <- priorphi[1]; b0 <- priorphi[2]
@@ -110,17 +111,17 @@ MCMC_tvp <- function(Y,X,nburn,nsave,priorbtheta=list(B_1=2,B_2=1,kappa0=1e-07),
     Sv_priors <- specify_priors(mu=sv_normal(mean=bmu, sd=Bmu), phi=sv_beta(a0,b0), sigma2=sv_gamma(shape=0.5,rate=1/(2*Bsigma)))
   
     #storage matrices
-    H_store <- matrix(NA,thin*nsave,T)
-    ALPHA_store <- array(NA,c(thin*nsave,T,K_))
-    V0_store <- array(NA,c(thin*nsave,K_))
-    svparms_store <- matrix(NA,thin*nsave,3)
-    D_store <- array(NA,c(thin*nsave,K_,T))
-    thresholds_store <- array(NA,c(thin*nsave,K_))
-    Omega_store <- array(NA,c(thin*nsave,K_,T))
-    omega_store <- matrix(NA,thin*nsave,K_)
-    sigma2_store <- matrix(NA,thin*nsave,1)
-    thrshprior_store <- matrix(NA,thin*nsave,K_)
-    kappa_store <- matrix(NA,thin*nsave, 1)
+    H_store <- matrix(NA,thindraws,T)
+    ALPHA_store <- array(NA,c(thindraws,T,K_))
+    V0_store <- array(NA,c(thindraws,K_))
+    svparms_store <- matrix(NA,thindraws,3)
+    D_store <- array(NA,c(thindraws,K_,T))
+    thresholds_store <- array(NA,c(thindraws,K_))
+    Omega_store <- array(NA,c(thindraws,K_,T))
+    omega_store <- matrix(NA,thindraws,K_)
+    sigma2_store <- matrix(NA,thindraws,1)
+    thrshprior_store <- matrix(NA,thindraws,K_)
+    kappa_store <- matrix(NA,thindraws, 1)
     #Vcov_store <- array(NA,c(thin*nsave,K_,K_,T))
     
     u_ <- matrix(NA,T,1)
